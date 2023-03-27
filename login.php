@@ -2,7 +2,7 @@
 $is_invalid = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     //sql file
-    $myqli = require __DIR__ . "/.php";
+    $myqli = require __DIR__ . "/database.php";
 
     $sql = sprintf("SELECT * FROM user
             WHERE username = '%s'",
