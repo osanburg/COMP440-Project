@@ -1,5 +1,7 @@
 <?php
+
 $is_invalid = false;
+
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     //sql file
     $myqli = require __DIR__ . "/database.php";
@@ -8,25 +10,26 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             WHERE username = '%s'",
             $mysqli -> real_escape_string($_POST["username"]));
 
-    $result = $mysqli -> query($sql);
+            $result = $mysqli -> query($sql);
 
-    $user = $result -> fetch_assoc();
-   
-    if ($user){
-        if ($_POST["password"] == $user["password"]){
-     
-            session_start();
+            $user = $result -> fetch_assoc();
 
-            session_regenerate_id();
+            if ($user) {
+        
+                if (password_verify($_POST["password"], $user["password_hash"])) {
+                    
+                    session_start();
+                    
+                    session_regenerate_id();
+                    
+                    $_SESSION["user_id"] = $user["id"];
+                    
+                    header("Location: index.php");
+                    exit;
+                }
+            }
 
-            $_SESSION["user_id"] = $user["id"];
-
-            header("Location: index.php");
-            exit;
-        }
-    }
     $is_invalid = true;
-
 }
 
 ?>
@@ -52,6 +55,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
+
+        <p>No account? <a href="signup.html"> Click to signup</a></p>
+
 
         <button>Login</button>
         
