@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             $user = $result -> fetch_assoc();
 
             if ($user){
-                if (password_verify($_POST["password"], $user["password_hash"])){
+                if (password_verify($_POST["password"], $user["username"])){
                     
                     session_start();
 
