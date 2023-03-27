@@ -41,7 +41,9 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Bidenator','hello2023','Joe','Biden','USpresident@fakemail.com'),('BillyBob','yeehaw','Billy','Bob','billybob@fakemail.com'),('Donny123','password','Donald','Trump','realdonaldtrump@fakemail.com'),('UnknownPerson','unknown','John','Doe','jd@fakemail.com'),('WhoIsJoe?','idk','Joe','Mama','gottem@fakemail.com');
+INSERT INTO `user` VALUES ('Bidenator','hello2023','Joe','Biden','USpresident@fakemail.com'),('BillyBob','yeehaw','Billy','Bob','billybob@fakemail.com'),('Donny123','password','Donald','Trump','realdonaldtrump@fakemail.com'),
+('UnknownPerson','unknown','John','Doe','jd@fakemail.com'),
+('WhoIsJoe?','idk','Joe','Mama','gottem@fakemail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
