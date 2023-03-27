@@ -14,19 +14,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
             $user = $result -> fetch_assoc();
 
-            if ($user) {
-        
-                if (password_verify($_POST["password"], $user["password_hash"])) {
-                    
+            if ($user) { 
                     session_start();
                     
                     session_regenerate_id();
                     
-                    $_SESSION["user_id"] = $user["id"];
+                    $_SESSION["user_id"] = $user["username"];
                     
                     header("Location: index.php");
                     exit;
-                }
             }
 
     $is_invalid = true;
