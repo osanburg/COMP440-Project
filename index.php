@@ -65,7 +65,7 @@ if(isset($_POST["import"]))
 
     <h1>Home</h1>
     <?php if (isset($_SESSION["user_id"])): ?>
-        <p>Hello <?= htmlspecialchars($user["firstName"]) ?></p>
+        <p>Welcome User!</p>
         <p><a href="logout.php">Log out</a></p>
         <div class="container" style="width:700px;">  
         <br/>
