@@ -8,25 +8,24 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             WHERE username = '%s'",
             $mysqli -> real_escape_string($_POST["username"]));
 
-            $result = $mysqli -> query($sql);
+    $result = $mysqli -> query($sql);
 
-            $user = $result -> fetch_assoc();
+    $user = $result -> fetch_assoc();
+   
+    if ($user){
+        if ($_POST["password"] == $user["password"]){
+     
+            session_start();
 
-            if ($user){
-                if (password_verify($_POST["password"], $user["username"])){
-                    
-                    session_start();
+            session_regenerate_id();
 
-                    session_regenerate_id();
+            $_SESSION["user_id"] = $user["id"];
 
-                    $_SESSION["user_id"] = $user["id"];
-
-                    header("Location: index.php");
-                    exit;
-                }
-            }
-
-         $is_invalid = true;
+            header("Location: index.php");
+            exit;
+        }
+    }
+    $is_invalid = true;
 
 }
 
@@ -49,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         <label for="username">Username</label>
         <input type="username" name="username" id="username"
-                    value="<?= htmlspecialchars($_POST["username"] ?? "")?> ">
+                    value="<?= htmlspecialchars($_POST["username"] ?? "")?>">
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
