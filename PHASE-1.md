@@ -30,5 +30,7 @@ your project and where exactly you need help. Otherwise, you might not be able t
 parts of this project.
 
 ---------------------------------------------------------------------------------------------------------
+https://youtu.be/zxp77NzLFto
 
+For database connection, we used ampps. Use appropriate database name where specified in files. 
 
