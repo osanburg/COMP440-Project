@@ -12,3 +12,10 @@ an existing review that she/he gave earlier.
 Some simple GUI interfaces are required for each functionality. All functionality must be performed
 via the interface of your system. Direct SQL statement execution via any tools (MySQL
 Workbench) can only be used for debugging purposes.
+
+
+----------------------------------------------------------------------------------------------------
+
+Team 26 Members: 
+Juan Espinoza
+Olaf Sanburg
