@@ -227,7 +227,7 @@ $r_item_id = 28592;
 $username = "BillyBob";
 $date = "2022-02-02";
 $score = "fair";
-$remark = "it's ok I guess...";
+$remark = "it''s ok I guess...";
 $sql = "insert into reviews (r_item_id, username, date, score, remark) 
     values ('".$r_item_id."', '".$username."', '".$date."', '".$score."', '".$remark."')";
 if($mysqli ->query($sql)){
@@ -241,7 +241,7 @@ $r_item_id = 45096;
 $username = "WhoIsJoe?";
 $date = "2021-06-07";
 $score = "excellent";
-$remark = "I'm addicted to buying these!";
+$remark = "I''m addicted to buying these!";
 $sql = "insert into reviews (r_item_id, username, date, score, remark) 
     values ('".$r_item_id."', '".$username."', '".$date."', '".$score."', '".$remark."')";
 if($mysqli ->query($sql)){
