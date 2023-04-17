@@ -1,7 +1,7 @@
 const validation = new JustValidate("#signup");
 
 validation
-    .addField("#username", [
+    .addField("#name", [
         {
             rule: "required"
         }
@@ -45,4 +45,5 @@ validation
     .onSuccess((event) => {
         document.getElementById("signup").submit();
     });
+    
     

@@ -32,7 +32,7 @@ if ($stmt -> execute()){
 } else {
     
     if ($mysqli->errno === 1062){
-        echo("email already taken");
+        echo("username/email already taken");
     } else {
     die($mysqli -> error . "  " . $mysqli->errno);
     }
