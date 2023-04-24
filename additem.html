@@ -27,11 +27,12 @@
             <input type="price" id="price" name="price">
         </div>
         <button>Submit</button>
+        <a href="index.php"> Back to main page.</a>
         <div>
             Today's Date: <span id="currentDate" name="currentDate"></span>
             <script>
-                date = new Date().toLocaleDateString();
-                document.getElementById("currentDate").innerHTML = date;
+                date_posted = new Date().toLocaleDateString();
+                document.getElementById("currentDate").innerHTML = date_posted;
             </script>
         </div>
     </form>

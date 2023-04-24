@@ -35,13 +35,14 @@ display: flex;
         <div class="column">
         <p>Hello User!</p>
 
-        <form action="search.php" method="post">Search for an Item<input type="text" name="search"><br>
+        <form action="search.php" method="post">Search for an Item <br> by Name or Category<input type="text" name="search"><br>
         <input type ="submit">
         </form>
         
         <p><a href="additem.html">Add an Item</a></p>
         <p><a href="logout.php">Log out</a></p>
         </div>
+
 
         <div class="column">
             <h2>Some of our items in stock!!</h2>
@@ -58,13 +59,14 @@ display: flex;
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT title, description, price FROM item";
+            $sql = "SELECT item.title, item.description, item.price, categories.name FROM item INNER JOIN
+            categories WHERE item.item_id = categories.c_item_id";
             $result = $conn->query($sql);
-
+       
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo "<br> Item: ". $row["title"]. " <br> Description: ". $row["description"]. " <br> Price: $" . $row["price"] . "<br>---------------";
+                    echo "<br> Item: ". $row["title"]. " <br> Description: ". $row["description"]. "<br> Category: ". $row["name"]. " <br> Price: $" . $row["price"] . "<br>--------------------------";
                 }
             } else {
                 echo "0 results";
@@ -74,7 +76,7 @@ display: flex;
         </div>
     </div>   
     <?php else: ?>
-        <p><a href="login.php">Log in</a> or <a href="signup.html">sign up</a> </p>
+        <p><a href="login.php">Log in</a> or <a href="signup.html">sign up</a></p>
         <form action="initialize-database.php">
         <button>Initialize Database</button>
         </form>

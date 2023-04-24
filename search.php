@@ -13,13 +13,14 @@ if ($conn->connect_error){
 	die("Connection failed: ". $conn->connect_error);
 }
 
-$sql = "select * from item,categories where title like '%$search%'";
+$sql = "SELECT title,name from item where title like '%$search%' UNION SELECT title,name 
+        from categories where name like '%$search%'";
 
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0){
+if ($result ->num_rows > 0){
 while($row = $result->fetch_assoc() ){
-	echo "<br> Item #: " .$row["item_id"]."<br>Item Name: ".$row["title"]."<br> Description: ".$row["description"]."<br>";
+	echo "<br> Item #: " .$row["item_id"]."<br>Item Name: ".$row["title"]."<br>Category:".$row['name']. "<br> Description: ".$row["description"]."<br>";
 }
 } else {
 	echo "0 records";
