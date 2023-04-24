@@ -27,6 +27,13 @@
             <input type="price" id="price" name="price">
         </div>
         <button>Submit</button>
+        <div>
+            Today's Date: <span id="currentDate" name="currentDate"></span>
+            <script>
+                date = new Date().toLocaleDateString();
+                document.getElementById("currentDate").innerHTML = date;
+            </script>
+        </div>
     </form>
 
 </body>

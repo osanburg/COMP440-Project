@@ -1,8 +1,10 @@
 <?php
+session_start();
+
 $mysqli = require __DIR__ . "/database.php";
 
-$sql = "INSERT INTO item(title, description, price)
-        VALUES (?, ?, ?)";
+$sql = "INSERT INTO item(title, description, date_posted, price, poster)
+        VALUES (?, ?, ?, ?, ?)";
 $sql = "INSERT INTO categories(name) VALUES (?)";
 
 
@@ -12,11 +14,16 @@ if (! $stmt -> prepare($sql)){
     die ("SQL error: " . $mysqli -> error);
 }
 
-$stmt ->bind_param("ssss",
+echo $_POST["currentDate"];
+var_dump($_POST["currentDate"]);
+
+$stmt ->bind_param("ssssss",
                    $_POST["title"],
                    $_POST["description"],
-                   $_POST["name"],
-                   $_POST["price"]);
+                   $_POST["price"],
+                   $_POST["currentDate"],
+                   $_SESSION["user_id"],
+                   $_POST["name"]);
 
 if ($stmt -> execute()){
 
