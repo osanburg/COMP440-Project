@@ -13,8 +13,10 @@ if ($conn->connect_error){
 	die("Connection failed: ". $conn->connect_error);
 }
 
-$sql = "SELECT title,name from item where title like '%$search%' UNION SELECT title,name 
-        from categories where name like '%$search%'";
+$sql = "SELECT item.title, categories.name from item 
+    inner join categories
+    on item.item_id=categories.c_item_id
+    where item.title='%$search%'";
 
 $result = $conn->query($sql);
 
