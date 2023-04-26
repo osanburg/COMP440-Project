@@ -3,6 +3,33 @@ session_start();
 include 'database.php';
 ?>
 
+<?php
+
+// Connect to the MySQL database for the search
+$servername = "localhost";
+$username = "root";
+$password = "password123";
+$dbname = "comp440";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch data from the database based on user input
+if(isset($_POST['search'])){
+  $search = $_POST['search'];
+  $sql = "SELECT item.item_id, item.title, item.description, item.price, categories.name
+  FROM item
+  INNER JOIN categories ON item_id = c_item_id
+  WHERE item.item_id LIKE '%$search%' OR item.title LIKE '%$search%' OR categories.name LIKE '%$search%' OR item.description LIKE '%$search%' OR item.price LIKE '%$search%'";
+  $result = $conn->query($sql);
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,10 +61,46 @@ display: flex;
     <div class="row">
         <div class="column">
         <p>Hello User!</p>
-
-        <form action="search.php" method="post">Search for an Item <br> by Name or Category<input type="text" name="search"><br>
+        <!--
+       <form action="search.php" method="post">Search for an Item <br> by Name or Category<input type="text" name="search"><br>
         <input type ="submit">
         </form>
+    -->
+    <form method="POST">
+  <label>Looking for a Specific Item?</label>
+  <input type="text" name="search">
+  <button type="submit">Search</button>
+</form>
+
+<?php
+if(isset($_POST['search']) && $result->num_rows > 0) {
+  echo "<table>";
+  while($row = $result->fetch_assoc()) {
+    echo "<tr>";
+    echo "<br>ID: ".$row['item_id']. "<br> Item: ". $row["title"]. " <br> Description: ". $row["description"]. "<br> Category: ". $row["name"]. " <br> Price: $" . $row["price"] . "<br>--------------------------";
+    echo "</tr>";
+  }
+
+} else if(isset($_POST['search'])) {
+  echo "No data found";
+}
+?>
+  </table>
+  <form action="review.php" method='POST'>
+    <label>Review:</label>
+    <input type='text' name='review'>
+    <label>Rating:</label>
+    <select name='score'>
+    <option value='1'>poor</option>
+    <option value='2'>fair</option>
+    <option value='3'>good</option>
+    <option value='4'>excellent</option>
+    </select>
+    <button type='submit'>Submit Review</button>
+    </form>
+  </table>
+
+
         
         <p><a href="additem.html">Add an Item</a></p>
         <p><a href="logout.php">Log out</a></p>
@@ -86,36 +149,3 @@ display: flex;
 
 </body>
 </html>
-
-<?php 
-$con = new PDO("mysql:host=localhost; dbname=comp440", 'root','password123');
-
-if(isset($_POST["submit"])){
-    $str = $_POST["item"];
-    $sth = $con->prepare("SELECT * FROM 'item' WHERE title = '$str'");
-    
-    $sth->setFetchMode(PDO:: FETCH_OBJ);
-    $sth-> execute();
-
-    if($row = $sth->fetch())
-    {
-        ?>
-        <br><br><br>
-        <table>
-            <tr>
-                <th>title</th>
-                <th>description</th>
-            </tr>
-            <tr>
-                <td><?php echo $row->title; ?></td>
-                <td><?php echo $row->description; ?></td>
-
-            </tr>
-        </table>
-       <?php     
-    }
-    else{
-        echo "Item not existent...";
-    }
-}
-?>
