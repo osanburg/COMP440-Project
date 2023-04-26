@@ -25,7 +25,11 @@ if(isset($_POST['search'])){
   FROM item
   INNER JOIN categories ON item_id = c_item_id
   WHERE item.item_id LIKE '%$search%' OR item.title LIKE '%$search%' OR categories.name LIKE '%$search%' OR item.description LIKE '%$search%' OR item.price LIKE '%$search%'";
-  $result = $conn->query($sql);
+  $result = $conn->query($sql); 
+}
+
+if(isset($_POST['review'])){
+
 }
 
 ?>
@@ -85,24 +89,11 @@ if(isset($_POST['search']) && $result->num_rows > 0) {
   echo "No data found";
 }
 ?>
-  </table>
-  <form action="review.php" method='POST'>
-    <label>Review:</label>
-    <input type='text' name='review'>
-    <label>Rating:</label>
-    <select name='score'>
-    <option value='1'>poor</option>
-    <option value='2'>fair</option>
-    <option value='3'>good</option>
-    <option value='4'>excellent</option>
-    </select>
-    <button type='submit'>Submit Review</button>
-    </form>
-  </table>
 
 
         
         <p><a href="additem.html">Add an Item</a></p>
+        <p><a href="review.php">Write a review on a product?</a></p>
         <p><a href="logout.php">Log out</a></p>
         </div>
 
