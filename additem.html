@@ -28,11 +28,12 @@
         </div>
         <button>Submit</button>
         <a href="index.php"> Back to main page.</a>
-        <div>
-            Today's Date: <span id="currentDate" name="currentDate"></span>
+        <div id="date_posted" name="date_posted">
             <script>
                 date_posted = new Date().toLocaleDateString();
-                document.getElementById("currentDate").innerHTML = date_posted;
+                document.getElementById("date_posted").innerText = date_posted;
+                var a = date_posted;
+                window.Location.href = window.location.href+'?a='+a;
             </script>
         </div>
     </form>
