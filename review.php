@@ -65,17 +65,36 @@ include 'database.php';
 	    // process submitted review
 	    if(isset($_POST['submit'])) {
 	    	$item_id = $_POST['item_id'];
-        $username = $_SESSION['user_id'];
+        	$username = $_SESSION['user_id'];
 	    	$rating = $_POST['rating'];
 	    	$review = $_POST['review'];
 	    	$date = date("Y-m-d");
-
-	    	// insert review into database
-	    	$sql = "INSERT INTO reviews (r_item_id, username, date, score, remark) VALUES ('$item_id', '$username','$date', '$rating', '$review')";
-	    	if ($conn->query($sql) === TRUE) {
-			    echo "Review submitted successfully!";
-			} else {
-			    echo "Error submitting review: " . $conn->error;
+			
+			// check if user is trying to review own item
+			$sql = "SELECT COUNT(item_id) FROM item WHERE poster='$username' AND item_id='$item_id'";
+			$result = $conn->query($sql);
+    		$row = $result->fetch_assoc(); 
+    		$own_item = $row['COUNT(item_id)'];
+    		
+			// check if user's daily review limit has been reached
+			$sql = "SELECT COUNT(*) FROM reviews WHERE username='$username' AND date='$date'";
+			$result = $conn->query($sql);
+    		$row = $result->fetch_assoc(); 
+    		$review_num = $row['COUNT(*)'];
+			
+			// perform checks, if ok proceed to insert review
+			if($own_item > 0){
+				echo "You cannot review your own item!";
+			} elseif ($review_num >= 3){
+				echo "You can only review 3 items per day!";
+			} else{
+	    		// insert review into database
+	    		$sql = "INSERT INTO reviews (r_item_id, username, date, score, remark) VALUES ('$item_id', '$username','$date', '$rating', '$review')";
+	    		if ($conn->query($sql) === TRUE) {
+			    	echo "Review submitted successfully!";
+				} else {
+			    	echo "Error submitting review: " . $conn->error;
+				}
 			}
 	    }
 	} else {
