@@ -30,3 +30,6 @@ use YouTube to record your video:
 https://www.labnol.org/software/create-youtube-screencast/27936/
 You need to come to the office hours or make an appointment with the instructor immediately if
 you fail to complete part 2 by the due date. Please send an email to me to list all the challenges of
+
+
+DEMO VIDEO: https://www.youtube.com/watch?v=tSMgM6zWp0U
