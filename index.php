@@ -44,16 +44,27 @@ if(isset($_POST['review'])){
 *{
     box-sizing: border-box;
 }
-.button{
+button{
     border-radius: 8px;
+    font-size: 17px;
+    padding: 5px;
 }
+
 .column {
- flex: 50%;
+ flex: 30%;
+ padding: 15px;
+ border: 5px solid lightblue;
+ border-radius: 12px;
+}
+body{
+  max-width: fit-content;
 }
 
 /* Clear floats after the columns */
 .row {
-display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
 </style>
 </head>
@@ -65,16 +76,12 @@ display: flex;
     <div class="row">
         <div class="column">
         <p>Hello User!</p>
-        <!--
-       <form action="search.php" method="post">Search for an Item <br> by Name or Category<input type="text" name="search"><br>
-        <input type ="submit">
-        </form>
-    -->
-    <form method="POST">
-  <label>Looking for a Specific Item?</label>
-  <input type="text" name="search">
-  <button type="submit">Search</button>
-</form>
+
+      <form method="POST">
+        <label>Looking for a Specific Item?</label>
+        <input type="text" name="search">
+        <button type="submit">Search</button>
+      </form>
 
 <?php
 if(isset($_POST['search']) && $result->num_rows > 0) {
@@ -88,10 +95,7 @@ if(isset($_POST['search']) && $result->num_rows > 0) {
 } else if(isset($_POST['search'])) {
   echo "No data found";
 }
-?>
-
-
-        
+?> 
         <p><a href="additem.html">Add an Item</a></p>
         <p><a href="review.php">Write a review on a product?</a></p>
         <p><a href="logout.php">Log out</a></p>
@@ -128,6 +132,48 @@ if(isset($_POST['search']) && $result->num_rows > 0) {
             $conn->close();
             ?>
         </div>
+
+
+          <div class="column">
+              <h2>Looking for specifics?</h2>
+              <form action = "phase3/expensiveitems.php">
+                <button>1. Most expensive items</button>
+                </form><br>
+                  <form action = "phase3/twoitems.php">
+                <button>2. List the users who posted at least two items that are posted on the same day, one has a category
+                        of X, and another has a category of Y </button>
+                </form><br>
+                <form action = "phase3/usercomment.php">
+                <button>3. List all the items posted by user X, such that all the comments are "Excellent" or "good" for
+                          these items</button>
+                </form><br>
+                <form action = "phase3/mostdate.php">
+                <button>4. List the users who posted the most number of items since 5/1/2020 (inclusive); if there is a tie,
+                        list all the users who have a tie</button>
+                </form><br>
+                <form action = "phase3/dropdownfavorite.php">
+                <button>5. List the other users who are favorited by both users X, and Y. Usernames X and Y will be
+                        selected from dropdown menus by the instructor</button>
+                </form><br>
+                <form action = "phase3/excellentreviews.php">
+                <button>6. Display all the users who never posted any "excellent" items: an item is excellent if at least
+                          three reviews are excellent</button>
+                </form><br>
+                <form action = "phase3/neverpoor.php">
+                <button>7. Users who never posted a "poor" review</button>
+                </form><br>
+                <form action = "phase3/eachpoor.php">
+                <button>8. Display all the users who posted some reviews, but each of them is "poor"</button>
+                </form><br>
+                <form action = "phase3/userneverpoor.php">
+                <button>9. Display those users such that each item they posted so far never received any "poor" reviews</button>
+                </form><br>
+                <form action = "phase3/excellentpair.php">
+                <button>10. User pair (A/B) such that they always give each other "excellent" reviews</button>
+                </form>
+          </div>
+
+
     </div>   
     <?php else: ?>
         <p><a href="login.php">Log in</a> or <a href="signup.html">sign up</a></p>
