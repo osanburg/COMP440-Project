@@ -36,16 +36,17 @@ body{
     <div class="column">
 
     <form method="POST">
-        <label>Looking for a Specific Item?</label>
-        <input type="text" name="search">
-        <button type="submit">Search</button>
+    <div class="container">
+        <label for="tag1"><b>X: </b></label>
+        <input type="text" name="tag1">
+        <label for="tag2"><b>Y: </b></label>
+        <input type="text" name="tag2">
+    </div>
+    <div class="container">
+    <button type="submit">Go</button>
+    </div>
       </form>
 
-      <form method="POST">
-        <label>Looking for a Specific Item?</label>
-        <input type="text" name="search">
-        <button type="submit">Search</button>
-      </form>
       <?php //Database function to display things on page for a logged in user
             $servername = "localhost";
             $username = "root";
@@ -59,7 +60,20 @@ body{
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT username,r_item_id,score FROM reviews WHERE score != 'poor' ";
+            // write SQL query
+            $sql = "SELECT poster, COUNT(poster) AS post_count
+            FROM item 
+            WHERE date_posted >= '2020-05-01'
+            GROUP BY poster 
+            HAVING COUNT(poster) = (
+            SELECT MAX(post_count) 
+                FROM (
+                    SELECT poster, COUNT(poster) AS post_count 
+                    FROM item 
+                    WHERE date_posted >= '2020-05-01'
+                    GROUP BY poster
+                    ) AS n
+                )";
             $result = $conn->query($sql);
        
             if ($result->num_rows > 0) {
