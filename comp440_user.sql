@@ -26,10 +26,10 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `username` varchar(15) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `firstName` varchar(15) NOT NULL,
   `lastName` varchar(15) NOT NULL,
-  `email` varchar(30) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -41,9 +41,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Bidenator','hello2023','Joe','Biden','USpresident@fakemail.com'),('BillyBob','yeehaw','Billy','Bob','billybob@fakemail.com'),('Donny123','password','Donald','Trump','realdonaldtrump@fakemail.com'),
-('UnknownPerson','unknown','John','Doe','jd@fakemail.com'),
-('WhoIsJoe?','idk','Joe','Mama','gottem@fakemail.com');
+INSERT INTO `user` VALUES ('Bidenator','hello2023','Joe','Biden','USpresident@fakemail.com'),('BillyBob','yeehaw','Billy','Bob','billybob@fakemail.com'),('Donny123','password','Donald','Trump','realdonaldtrump@fakemail.com'),('testname','pw','first','last','@mail'),('UnknownPerson','unknown','John','Doe','jd@fakemail.com'),('WhoIsJoe?','idk','Joe','Mama','gottem@fakemail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-22 11:46:20
+-- Dump completed on 2023-05-08 22:23:15

@@ -39,7 +39,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES ('cellphone',10001),('electronic',10001),('home repair',12345),('computer part',28592),('vehicle',45096),('food',70707),('non-vegan',70707);
+INSERT INTO `categories` VALUES ('cellphone',1),('electronic',1),('home repair',2),('computers',3),('electronic',3),('vehicle',4),('food',5),('non-vegan',5),('computers',6),('food',6),('computers',7),('electronic',7);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-22 11:46:20
+-- Dump completed on 2023-05-08 22:23:15

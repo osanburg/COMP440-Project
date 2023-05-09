@@ -34,7 +34,7 @@ CREATE TABLE `item` (
   PRIMARY KEY (`item_id`),
   KEY `poster_idx` (`poster`),
   CONSTRAINT `poster` FOREIGN KEY (`poster`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=70708 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70773 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (10001,'Smartphone','the new iphone 14','2022-09-16',799,''),(12345,'Flex Tape','I sawed this boat in half!!!','2017-12-25',19.99,''),(28592,'Graphics Card','Nvidia GeForce RTX 4090','2023-01-01',2100,''),(45096,'Forklift','the ultimate vehicle for lifting objects','2020-02-02',50000,''),(70707,'Mystery Meat','dont know where it came from','2023-03-21',2,'');
+INSERT INTO `item` VALUES (1,'Smartphone','the new iphone 14','2022-09-16',799,'BillyBob'),(2,'Flex Tape','I sawed this boat in half!!!','2017-12-25',20,'Bidenator'),(3,'Graphics Card','Nvidia GeForce RTX 4090','2023-01-01',2100,'Donny123'),(4,'Forklift','the ultimate vehicle for lifting objects','2023-01-01',50000,'Donny123'),(5,'Mystery Meat','dont know where it came from','2023-03-21',2,'WhoIsJoe?'),(6,'Beans','High in fiber','2023-04-20',2.5,'testname'),(7,'Laptop','Up to 3 hour battery life','2021-07-23',950,'BillyBob');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-15 17:24:12
+-- Dump completed on 2023-05-08 22:23:15
