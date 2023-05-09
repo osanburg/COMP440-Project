@@ -47,14 +47,24 @@ body{
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT title, MAX(price) FROM item";
+            // write SQL query
+            $sql = "SELECT name, title, price 
+                FROM categorized_items ci1 
+                WHERE price IN (
+                SELECT MAX(price) 
+                FROM categorized_items ci2 
+                WHERE ci1.name = ci2.name
+                )";
+
+            // execute query and store result
             $result = $conn->query($sql);
-       
+
+            // check if any result is found
             if ($result->num_rows > 0) {
-                // output data of each row
+                // loop through result and output data
                 while($row = $result->fetch_assoc()) {
-                    echo "<br> User: " .$row["title"]. "<br>Item ID: " .$row["price"]. "<br>--------------------------";
-                }
+                    echo "Category: " . $row["name"]. " - Item: " . $row["title"]. " - Price: " . $row["price"]. "<br>-------------------------------------------------------------<br>";
+                }       
             } else {
                 echo "0 results";
             }

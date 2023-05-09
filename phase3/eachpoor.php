@@ -47,13 +47,13 @@ body{
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT username,r_item_id,score FROM reviews WHERE score = 'poor' ";
+            $sql = "SELECT username FROM reviews WHERE score = 'poor' GROUP BY username";
             $result = $conn->query($sql);
        
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo "<br> User: " .$row["username"]. "<br>Item ID: " .$row["r_item_id"]. "<br> Score: " .$row["score"]. "<br>--------------------------";
+                    echo "User: " .$row["username"]. "<br>--------------------------<br>";
                 }
             } else {
                 echo "0 results";

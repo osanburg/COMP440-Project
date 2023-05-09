@@ -47,13 +47,25 @@ body{
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT username,r_item_id,score FROM reviews WHERE score = 'excellent' ";
+            // write SQL query
+            $sql = "SELECT poster 
+                FROM item 
+                WHERE item_id IN (
+                    SELECT r_item_id 
+                    FROM reviews 
+                    WHERE score = 'excellent' 
+                    GROUP BY r_item_id 
+                    HAVING COUNT(r_item_id) >= 3
+                )";
+
+            // execute query and store result
             $result = $conn->query($sql);
-       
+
+            // check if any result is found
             if ($result->num_rows > 0) {
-                // output data of each row
+                // loop through result and output data
                 while($row = $result->fetch_assoc()) {
-                    echo "<br> User: " .$row["username"]. "<br>Item ID: " .$row["r_item_id"]. "<br> Score: " .$row["score"]. "<br>--------------------------";
+                    echo "User: " . $row["poster"]. "<br>--------------------------<br>";
                 }
             } else {
                 echo "0 results";
