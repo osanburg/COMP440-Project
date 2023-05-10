@@ -35,19 +35,17 @@ body{
 <div class="row">
     <div class="column">
 
-    <form method="POST">
-    <div class="container">
-        <label for="tag1"><b>X: </b></label>
-        <input type="text" name="tag1">
-        <label for="tag2"><b>Y: </b></label>
-        <input type="text" name="tag2">
-    </div>
-    <div class="container">
-    <button type="submit">Go</button>
-    </div>
-      </form>
+    <form method="post">
+        <label for="item_name1">Item Name 1:</label>
+        <input type="text" name="item_name1" id="item_name1" required>
+        <br><br>
+        <label for="item_name2">Item Name 2:</label>
+        <input type="text" name="item_name2" id="item_name2" required>
+        <br><br>
+        <input type="submit" name="submit" value="Search">
+    </form>
 
-      <?php //Database function to display things on page for a logged in user
+<?php //Database function to display things on page for a logged in user
             $servername = "localhost";
             $username = "root";
             $password = "password123";
@@ -56,36 +54,50 @@ body{
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
             // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+           // check database connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-            // write SQL query
-            $sql = "SELECT poster, COUNT(poster) AS post_count
-            FROM item 
-            WHERE date_posted >= '2020-05-01'
-            GROUP BY poster 
-            HAVING COUNT(poster) = (
-            SELECT MAX(post_count) 
-                FROM (
-                    SELECT poster, COUNT(poster) AS post_count 
-                    FROM item 
-                    WHERE date_posted >= '2020-05-01'
-                    GROUP BY poster
-                    ) AS n
-                )";
-            $result = $conn->query($sql);
-       
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<br> User: " .$row["username"]. "<br>Item ID: " .$row["r_item_id"]. "<br> Score: " .$row["score"]. "<br>--------------------------";
-                }
-            } else {
-                echo "0 results";
-            }
-            $conn->close();
-            ?>  
+// check if the form was submitted
+if (isset($_POST['submit'])) {
+    // get the item names from the form
+    $itemName1 = $_POST['item_name1'];
+    $itemName2 = $_POST['item_name2'];
+
+    // SQL query to retrieve posters who have posted at least twice in a day for the specified items
+    $sql = "SELECT ci1.poster, ci1.date_posted
+            FROM categorized_items ci1
+            JOIN categorized_items ci2 ON ci1.poster = ci2.poster
+            WHERE ci1.name = '$itemName1' AND ci2.name = '$itemName2'
+            AND DATE(ci1.date_posted) = DATE(ci2.date_posted)
+            GROUP BY ci1.poster, ci1.date_posted
+            HAVING COUNT(*) >= 2";
+
+    // execute the query
+    $result = $conn->query($sql);
+
+    // check for errors
+    if (!$result) {
+        die("Error: " . $sql . "<br>" . $conn->error);
+    }
+
+    // display the results
+    if ($result->num_rows > 0) {
+        echo "<h2>Posters who have posted at least twice in a day for the items '$itemName1' and '$itemName2':</h2>";
+        echo "<ul>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<li>Poster: " . $row['poster'] . ", Date Posted: " . $row['date_posted'] . "</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "No posters found.";
+    }
+
+    // close the database connection
+    $conn->close();
+}
+?> 
     </div>
 </div>
 
