@@ -71,8 +71,8 @@ if (isset($_POST['submit'])) {
             JOIN categorized_items ci2 ON ci1.poster = ci2.poster
             WHERE ci1.name = '$itemName1' AND ci2.name = '$itemName2'
             AND DATE(ci1.date_posted) = DATE(ci2.date_posted)
-            GROUP BY ci1.poster, ci1.date_posted
-            HAVING COUNT(*) >= 2";
+            AND ci1.title <> ci2.title
+            GROUP BY ci1.poster, ci1.date_posted";
 
     // execute the query
     $result = $conn->query($sql);
