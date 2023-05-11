@@ -49,14 +49,17 @@ body{
 
             // write SQL query
             $sql = "SELECT poster 
-                FROM item 
-                WHERE item_id IN (
-                    SELECT r_item_id 
-                    FROM reviews 
-                    WHERE score = 'excellent' 
-                    GROUP BY r_item_id 
-                    HAVING COUNT(r_item_id) >= 3
-                )";
+                FROM item
+                WHERE poster NOT IN (
+                    SELECT poster
+                    FROM item
+                    WHERE item_id IN (
+                        SELECT r_item_id
+                        FROM reviews
+                        WHERE score = 'excellent'
+                        GROUP BY r_item_id
+                        HAVING COUNT(r_item_id) >= 3))
+                GROUP BY poster";
 
             // execute query and store result
             $result = $conn->query($sql);
