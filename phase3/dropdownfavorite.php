@@ -2,31 +2,33 @@
 <html>
 <head>
 	<title>Favorited by Both</title>
-</head>
-<style>
-*{
-    box-sizing: border-box;
-}
-.button{
-    border-radius: 8px;
-}
-.column {
- flex: 30%;
- padding: 15px;
- border: 5px solid lightblue;
- border-radius: 12px;
-}
-body{
-  max-width: fit-content;
-}
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+	<style>
+		*{
+			box-sizing: border-box;
+		}
+		.button{
+			border-radius: 8px;
+		}
+		.column {
+		flex: 30%;
+		padding: 15px;
+		border: 5px solid lightblue;
+		border-radius: 12px;
+		}
+		body{
+		max-width: fit-content;
+		}
 
-/* Clear floats after the columns */
-.row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-}
-</style>
+		/* Clear floats after the columns */
+		.row {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-gap: 10px;
+		}
+	</style>
+</head>
 <body>
 	<h1>Favorited by Both Users Search</h1>
 	<form method="post">
