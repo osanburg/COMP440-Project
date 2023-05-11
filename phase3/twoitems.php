@@ -36,10 +36,10 @@ body{
     <div class="column">
 
     <form method="post">
-        <label for="item_name1">Item Name 1:</label>
+        <label for="item_name1">Category Name 1:</label>
         <input type="text" name="item_name1" id="item_name1" required>
         <br><br>
-        <label for="item_name2">Item Name 2:</label>
+        <label for="item_name2">Category Name 2:</label>
         <input type="text" name="item_name2" id="item_name2" required>
         <br><br>
         <input type="submit" name="submit" value="Search">
