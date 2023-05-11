@@ -85,8 +85,9 @@ body{
             // close prepared statement and database connection
             $stmt->close();
             $conn->close();
-            ?>  
+            ?> 
     </div>
+    <button onclick="window.location.href='http://localhost/COMP440-Project/index.php'">Go back to home page</button>  
 </div>
 
 

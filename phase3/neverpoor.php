@@ -69,7 +69,8 @@ body{
                 echo "0 results";
             }
             $conn->close();
-            ?>  
+            ?>
+        <button onclick="window.location.href='http://localhost/COMP440-Project/index.php'">Go back to home page</button>   
     </div>
 </div>
 

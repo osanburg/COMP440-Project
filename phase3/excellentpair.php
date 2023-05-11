@@ -76,15 +76,17 @@ body{
 
             if (mysqli_num_rows($result) > 0) {
                 // output data of each row
+                echo "User Pairs:<br><br>";
                 while($row = mysqli_fetch_assoc($result)) {
-                    echo "User Pair: " . $row["user1"]. " - " . $row["user2"]. "<br>--------------------------------------------<br>";
+                    echo $row["user1"]. " - " . $row["user2"]. "<br>--------------------------------------------<br>";
                 }
             } else {
                 echo "0 results";
             }
 
             $conn->close();
-            ?>  
+            ?> 
+        <button onclick="window.location.href='http://localhost/COMP440-Project/index.php'">Go back to home page</button> 
     </div>
 </div>
 

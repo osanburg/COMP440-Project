@@ -96,6 +96,7 @@
 			mysqli_close($conn);
 		}
 	?>
+	<button onclick="window.location.href='http://localhost/COMP440-Project/index.php'">Go back to home page</button>
 </body>
 </html>
         
