@@ -57,10 +57,15 @@ body{
 
             // prepare and bind input parameter
             $poster_name = $_POST["poster_name"];
-            $stmt = $conn->prepare("SELECT item.title, item.description, item.date_posted, item.price, item.poster 
-                        FROM item 
-                        INNER JOIN reviews ON item.item_id = reviews.r_item_id 
-                        WHERE item.poster = ? AND (reviews.score = 'good' OR reviews.score = 'excellent')");
+            $stmt = $conn->prepare("SELECT item.title, item.description, item.date_posted, item.price, item.poster
+            FROM item
+            INNER JOIN (SELECT *
+                        FROM reviews
+                        WHERE r_item_id NOT IN (SELECT r_item_id 
+                                                FROM reviews 
+                                                WHERE score = 'fair' OR score = 'poor')
+                        ) AS rev ON item.item_id = rev.r_item_id
+            WHERE item.poster = ?;");
 
             $stmt->bind_param("s", $poster_name);
             $stmt->execute();
