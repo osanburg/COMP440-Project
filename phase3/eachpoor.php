@@ -47,9 +47,18 @@ body{
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT username FROM reviews WHERE score = 'poor' GROUP BY username";
+            $sql = "SELECT username
+                FROM reviews
+                WHERE username NOT IN (
+                    SELECT username
+                    FROM reviews
+                    WHERE score != 'poor'
+                    GROUP BY username
+                )
+                GROUP BY username";
+            
             $result = $conn->query($sql);
-       
+
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
